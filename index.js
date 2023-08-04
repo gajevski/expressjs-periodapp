@@ -23,13 +23,20 @@ app.use(
   })
 );
 
+let periods = [
+  { id: 0, description: "Period one" },
+  { id: 1, description: "Period two" },
+  { id: 2, description: "Period three" },
+];
+
 app.get("/all-periods", (request, response) => {
-  response.json({
-    periods: [
-      { id: 0, description: "Period one" },
-      { id: 1, description: "Period two" },
-    ],
-  });
+  response.json({ periods });
+});
+
+app.post("/add-period", (request, response) => {
+  const periodData = request.body;
+  periods.push(periodData);
+  response.json({ periods });
 });
 
 app.listen(port, () => {
