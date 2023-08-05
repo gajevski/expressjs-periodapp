@@ -39,6 +39,18 @@ app.post("/add-period", (request, response) => {
   response.json({ periods });
 });
 
+app.delete("/delete-period", (request, response) => {
+  const periodId = request.body.id;
+  const periodIndex = periods.findIndex((period) => period.id === periodId);
+
+  if (periodIndex === -1) {
+    return response.status(404).json({ message: "User not found" });
+  }
+
+  periods.splice(periodIndex, 1);
+  response.json({ periods });
+});
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
