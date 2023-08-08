@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 let periods = [
-  { id: 0, description: "Period one" },
-  { id: 1, description: "Period two" },
-  { id: 2, description: "Period three" },
+  { id: 0, startDate: "2023-08-08T12:34:56.789Z", description: "Period one" },
+  { id: 1, startDate: "2023-08-08T12:34:56.789Z", description: "Period two" },
+  { id: 2, startDate: "2023-08-08T12:34:56.789Z", description: "Period three" },
 ];
 
 router.get("/all-periods", (request, response) => {
