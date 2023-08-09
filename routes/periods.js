@@ -7,12 +7,17 @@ let periods = [
   { id: 2, startDate: "2023-08-08T12:34:56.789Z", description: "Period three" },
 ];
 
+function generateRandomId() {
+  return Math.floor(Math.random() * 1000);
+}
+
 router.get("/all-periods", (request, response) => {
   response.json({ periods });
 });
 
 router.post("/add-period", (request, response) => {
   const periodData = request.body;
+  periodData.id = generateRandomId();
   periods.push(periodData);
   response.json({ periods });
 });
