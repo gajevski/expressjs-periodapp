@@ -16,21 +16,26 @@ router.use(
 const users = [
     {
         id: 1,
-        username: 'user1',
-        password: '$2b$10$ejCQuVd4lC8qG0jjDmB2hu/TU9Kzch5XnFEaM2TGcQRy4bH3l.GAa', // Hashed password: 'password'
+        email: 'user@user.com',
+        password: 'password', // Hashed password: 'password'
     },
 ];
 
 router.post('/', (req, res) => {
-    const { username, password } = req.body;
-    const user = users.find(user => user.username === username);
-    const result = bcrypt.compare(password, user.password);
+    const { email, password } = req.body;
+    const user = users.find(user => user.email === email);
 
-    if (user && result) {
-        req.session.user = user;
-        res.send('Correct!');
+    if (user) {
+        const result = password === user.password;
+
+        if (result) {
+            req.session.user = user;
+            res.status(200).send('Correct!');
+        } else {
+            res.status(401).send('Invalid email or password');
+        }
     } else {
-        res.send('Invalid username or password');
+        res.status(401).send('Invalid email or password');
     }
 });
 
