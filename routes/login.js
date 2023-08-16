@@ -32,10 +32,14 @@ router.post('/', (req, res) => {
             req.session.user = user;
             res.status(200).send('Correct!');
         } else {
-            res.status(401).send('Invalid email or password');
+            res.status(401).json({
+                passwordError: "Nieprawidłowy email lub hasło",
+            });
         }
     } else {
-        res.status(401).send('Invalid email or password');
+        res.status(401).json({
+            passwordError: "Nieprawidłowy email lub hasło",
+        });
     }
 });
 
